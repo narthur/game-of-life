@@ -5,3 +5,5 @@ services:
     buildCommand: pnpm install && pnpm build
     staticPublishPath: ./dist
     pullRequestPreviewsEnabled: true
+    domains:
+      - life.nathanarthur.com

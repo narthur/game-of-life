@@ -1,7 +1,4 @@
 import './style.css'
-import typescriptLogo from './typescript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.ts'
 
 const CELL_SIZE = 20; // px
 const TICK_RATE = 200; // ms
@@ -106,7 +103,7 @@ function createGrid() {
   let isPaused = false;
   
   // Start game loop
-  const gameLoop = setInterval(() => {
+  setInterval(() => {
     if (isPaused) return;
     const nextState = nextGeneration(gameState);
     const cells = gridElement.querySelectorAll('button');

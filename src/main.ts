@@ -1,15 +1,10 @@
 import { countNeighbors } from "./lib/countNeighbors";
+import { initializeGrid } from "./lib/initializeGrid";
 import { Grid } from "./types";
 
 const CELL_SIZE = 20; // px
 const TICK_RATE = 200; // ms
 let lastUpdateTime = 0;
-
-function initializeGrid(width: number, height: number): Grid {
-  return Array(height)
-    .fill(0)
-    .map(() => Array(width).fill(false));
-}
 
 function nextGeneration(grid: Grid): Grid {
   const newGrid = grid.map((row) => [...row]);

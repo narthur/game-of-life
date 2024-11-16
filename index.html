@@ -117,13 +117,8 @@
       button:focus-visible {
         outline: none;
       }
-    </style>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
-    <footer
-      style="
+
+      footer {
         text-align: center;
         padding: 8px 12px;
         font-size: 14px;
@@ -134,9 +129,15 @@
         z-index: 1000;
         mix-blend-mode: screen;
         box-shadow: 0 0 10px rgba(144, 238, 144, 0.3);
+        background-color: rgba(144, 238, 144, 0.1);
         border-radius: 8px;
-      "
-    >
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+    <footer>
       Made by
       <a href="https://nathanarthur.com" style="color: inherit"
         >Nathan Arthur</a

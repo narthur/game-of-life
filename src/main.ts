@@ -41,6 +41,17 @@ function nextGeneration(grid: Grid): Grid {
   return newGrid;
 }
 
+let isPaused = false;
+let unpauseTimeout: number;
+
+function pause() {
+  isPaused = true;
+  if (unpauseTimeout) clearTimeout(unpauseTimeout);
+  unpauseTimeout = setTimeout(() => {
+    isPaused = false;
+  }, 3000);
+}
+
 function createGrid() {
   const width = Math.floor((window.innerWidth - 2) / CELL_SIZE);
   const height = Math.floor((window.innerHeight - 2) / CELL_SIZE);
@@ -72,10 +83,7 @@ function createGrid() {
             ? "🌿"
             : "🌳"
           : " ";
-        isPaused = true;
-        setTimeout(() => {
-          isPaused = false;
-        }, 3000);
+        pause();
       });
 
       cell.addEventListener("mouseover", () => {
@@ -84,18 +92,13 @@ function createGrid() {
           const neighbors = countNeighbors(gameState, x, y);
           cell.textContent =
             neighbors <= 2 ? "🌱" : neighbors <= 4 ? "🌿" : "🌳";
-          isPaused = true;
-          setTimeout(() => {
-            isPaused = false;
-          }, 3000);
+          pause();
         }
       });
 
       gridElement.appendChild(cell);
     }
   }
-
-  let isPaused = false;
 
   // Start game loop
   setInterval(() => {

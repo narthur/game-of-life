@@ -1,5 +1,6 @@
 const CELL_SIZE = 20; // px
 const TICK_RATE = 200; // ms
+let lastUpdateTime = 0;
 
 type Grid = boolean[][];
 
@@ -100,26 +101,32 @@ function createGrid() {
     }
   }
 
-  // Start game loop
-  setInterval(() => {
-    if (isPaused) return;
-    const nextState = nextGeneration(gameState);
-    const cells = gridElement.querySelectorAll("button");
+  function update(timestamp: number) {
+    if (timestamp - lastUpdateTime >= TICK_RATE && !isPaused) {
+      lastUpdateTime = timestamp;
 
-    for (let y = 0; y < height; y++) {
-      for (let x = 0; x < width; x++) {
-        gameState[y][x] = nextState[y][x];
-        const cell = cells[y * width + x] as HTMLButtonElement;
-        if (nextState[y][x]) {
-          const neighbors = countNeighbors(nextState, x, y);
-          cell.textContent =
-            neighbors <= 2 ? "🌱" : neighbors <= 4 ? "🌿" : "🌳";
-        } else {
-          cell.textContent = "";
+      const nextState = nextGeneration(gameState);
+      const cells = gridElement.querySelectorAll("button");
+
+      for (let y = 0; y < height; y++) {
+        for (let x = 0; x < width; x++) {
+          gameState[y][x] = nextState[y][x];
+          const cell = cells[y * width + x] as HTMLButtonElement;
+          if (nextState[y][x]) {
+            const neighbors = countNeighbors(nextState, x, y);
+            cell.textContent =
+              neighbors <= 2 ? "🌱" : neighbors <= 4 ? "🌿" : "🌳";
+          } else {
+            cell.textContent = "";
+          }
         }
       }
     }
-  }, TICK_RATE);
+
+    requestAnimationFrame(update);
+  }
+
+  requestAnimationFrame(update);
 
   return gridElement;
 }

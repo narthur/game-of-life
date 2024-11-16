@@ -1,5 +1,6 @@
 import { countNeighbors } from "./lib/countNeighbors";
 import { initializeGrid } from "./lib/initializeGrid";
+import { nextGeneration } from "./lib/nextGeneration";
 
 const CELL_SIZE = 20; // px
 const TICK_RATE = 200; // ms

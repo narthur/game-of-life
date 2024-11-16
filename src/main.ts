@@ -72,8 +72,7 @@ function createGrid() {
           const cell = cells[y * width + x] as HTMLButtonElement;
           if (nextState[y][x]) {
             const neighbors = countNeighbors(nextState, x, y);
-            cell.textContent =
-              neighbors <= 2 ? "🌱" : neighbors <= 4 ? "🌿" : "🌳";
+            cell.textContent = getEmoji(neighbors);
           } else {
             cell.textContent = "";
           }

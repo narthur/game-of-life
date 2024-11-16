@@ -1,4 +1,5 @@
 import { countNeighbors } from "./lib/countNeighbors";
+import { getEmoji } from "./lib/getEmoji";
 import { initializeGrid } from "./lib/initializeGrid";
 import { nextGeneration } from "./lib/nextGeneration";
 
@@ -41,13 +42,7 @@ function createGrid() {
       cell.addEventListener("click", () => {
         gameState[y][x] = !gameState[y][x];
         const neighbors = countNeighbors(gameState, x, y);
-        cell.textContent = gameState[y][x]
-          ? neighbors <= 2
-            ? "🌱"
-            : neighbors <= 4
-            ? "🌿"
-            : "🌳"
-          : " ";
+        cell.textContent = gameState[y][x] ? getEmoji(neighbors) : " ";
         pause();
       });
 
@@ -55,8 +50,7 @@ function createGrid() {
         if (isDrawing && !gameState[y][x]) {
           gameState[y][x] = true;
           const neighbors = countNeighbors(gameState, x, y);
-          cell.textContent =
-            neighbors <= 2 ? "🌱" : neighbors <= 4 ? "🌿" : "🌳";
+          cell.textContent = getEmoji(neighbors);
           pause();
         }
       });
